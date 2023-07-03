@@ -2,7 +2,6 @@ package Domain.Common.Service;
 
 import java.util.List;
 
-import Domain.Common.Dao.BoardDao;
 import Domain.Common.Dao.CommentDao;
 import Domain.Common.Dto.CommentDto;
 
