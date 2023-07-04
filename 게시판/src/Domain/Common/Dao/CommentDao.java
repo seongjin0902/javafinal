@@ -71,10 +71,4 @@ public class CommentDao {
 		
 		return pstmt.executeUpdate();
 	}
-	
-	private static CommentDao instance;
-	public static CommentDao getInstance() {
-
-		return instance;
-	}
 }

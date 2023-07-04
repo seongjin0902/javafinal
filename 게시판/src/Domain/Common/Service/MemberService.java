@@ -53,9 +53,4 @@ public class MemberService {
 
 	}
 	
-//	dkfjssfskf;slfs
-	public String main() {
-		
-	}
-
 }

@@ -70,9 +70,4 @@ public class MemberDao {
 		
 		return pstmt.executeUpdate();
 	}
-	private static MemberDao instance;
-	public static MemberDao getInstance() {
-		if(instance == null) instance = new MemberDao();
-		return instance;
-	}
 }

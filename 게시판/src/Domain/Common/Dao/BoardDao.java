@@ -18,6 +18,14 @@ public class BoardDao {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+	//싱글톤 패턴
+		private static BoardDao instance; 
+		public static BoardDao getInstance() {
+			if(instance==null)
+				instance=new BoardDao();
+			return instance;
+		}
+	
 	private BoardDao() {
 		id = "root";
 		pw = "1234";
@@ -34,18 +42,17 @@ public class BoardDao {
 	
 //		CURD
 //	글 작성
-	public int insert(BoardDto dto) throws Exception{
-		pstmt = conn.prepareStatement("insert into tbl_contents values (?,?,?,?,now())");
-		pstmt.setInt(1, dto.getNumber());
-		pstmt.setString(2, dto.getId());
-		pstmt.setString(3, dto.getTitle());
-		pstmt.setString(4, dto.getContents());
-		pstmt.setString(5, dto.getNowdate());
+	public int insert(BoardDto dto, String role) throws Exception{
+		pstmt = conn.prepareStatement("insert into tbl_board values (null,?,?,?,now(),null)");
+		
+		pstmt.setString(1, dto.getId());
+		pstmt.setString(2, dto.getTitle());
+		pstmt.setString(3, dto.getContents());
 		
 		return pstmt.executeUpdate();
 	}
 //	전체글 조회
-	public List<BoardDto> select_all() throws Exception{
+	public List<BoardDto> select() throws Exception{
 		List<BoardDto> list = new ArrayList();
 		BoardDto dto = null;
 		pstmt = conn.prepareStatement("select * from tbl_contents");
@@ -64,8 +71,17 @@ public class BoardDao {
 		}
 		return list;
 	}
+	
+	//글 하나 조회(number로 조회)
+	public BoardDto select(int number) {
+		
+		//여기에 DB연결 코드를 입력해야함
+		//number로 글 하나를 받아오는 것
+		return null;
+	}
+	
 //	id 나 title로 글 조회
-	public List<BoardDto> select_id(String id) throws Exception{
+	public List<BoardDto> search_id(String id) throws Exception{
 		List<BoardDto> list = new ArrayList();
 		BoardDto dto = null;
 		pstmt = conn.prepareStatement("select * from tbl_contents where id = ?");
@@ -84,7 +100,7 @@ public class BoardDao {
 		pstmt.close();
 		return list;
 	}
-	public List<BoardDto> select_title(String title) throws Exception{
+	public List<BoardDto> search_title(String title) throws Exception{
 		List<BoardDto> list = new ArrayList();
 		BoardDto dto = null;
 		pstmt = conn.prepareStatement("select * from tbl_contents where title = ?");
@@ -126,8 +142,8 @@ public class BoardDao {
 //	내가 쓴 글 수정
 	public int update(BoardDto dto) throws Exception{
 		pstmt = conn.prepareStatement("update tbl_contents set title=?,contents=?");
-		pstmt.setString(1, dto.getTitle());
-		pstmt.setString(2, dto.getContents());
+		pstmt.setString(3, dto.getTitle());
+		pstmt.setString(4, dto.getContents());
 		
 		return pstmt.executeUpdate();
 	}
@@ -139,6 +155,8 @@ public class BoardDao {
 		
 		return pstmt.executeUpdate();
 	}
+
+
 	
 	
 }

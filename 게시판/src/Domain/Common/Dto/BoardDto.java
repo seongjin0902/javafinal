@@ -5,19 +5,19 @@ public class BoardDto {
 	private String id;  		//userid 
 	private String title;		//글제목
 	private String contents;	//글내용
-	private String Nowdate;		//작성날짜
+	private String date;		//작성날짜
 	private int hits;			//조회수
 	
 //	디폴트 생성자
 	public BoardDto() {}
 	
 //	모든 인자를 받는 생성자
-	public BoardDto(int number, String id, String title, String contents, String Nowdate, int hits) {
+	public BoardDto(int number, String id, String title, String contents, String date, int hits) {
 		this.number = number;
 		this.id = id;
 		this.title = title;
 		this.contents = contents;
-		this.Nowdate = Nowdate;
+		this.date = date;
 		this.hits = hits;
 	}
 
@@ -25,7 +25,7 @@ public class BoardDto {
 	@Override
 	public String toString() {
 		return "ContentsDto [number=" + number + ", id=" + id + ", title=" + title + ", contents=" + contents
-				+ ", Nowdate=" + Nowdate + ", hits=" + hits + "]";
+				+ ", date=" + date + ", hits=" + hits + "]";
 	}
 
 //	getter and setter
@@ -61,12 +61,12 @@ public class BoardDto {
 		this.contents = contents;
 	}
 
-	public String getNowdate() {
-		return Nowdate;
+	public String getDate() {
+		return date;
 	}
 
-	public void setNowdate(String Nowdate) {
-		this.Nowdate = Nowdate;
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public int getHits() {
@@ -76,6 +76,7 @@ public class BoardDto {
 	public void setHits(int hits) {
 		this.hits = hits;
 	}
+
 	
 	
 	
