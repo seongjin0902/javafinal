@@ -56,7 +56,7 @@ public class MemberDao {
 		return pstmt.executeUpdate();
 	}
 // 	회원 id/pw 조회
-	public List<MemberDto> select() throws Exception{
+	public List<MemberDto> select(String id, String pw) throws Exception{
 		List<MemberDto> list = new ArrayList();
 		MemberDto dto = null;
 		pstmt = conn.prepareStatement("select * from tbl_member");
@@ -72,9 +72,9 @@ public class MemberDao {
 		return list;
 	}
 //	회원 id/pw 삭제
-	public int delete(MemberDto dto) throws Exception{
+	public int delete(String id) throws Exception{
 		pstmt = conn.prepareStatement("delete from tbl_member where id = ?");
-		pstmt.setString(1,dto.getId());
+		pstmt.setString(1,id);
 		
 		return pstmt.executeUpdate();
 	}

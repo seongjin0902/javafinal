@@ -9,6 +9,7 @@ import Domain.Common.Service.BoardService;
 
 public class BoardController {
 
+	private static final BoardDto Dto = null;
 	private BoardService service; // 파라미터를 보드서비스로 전달하기 위한 변수 생성
 
 	public BoardController() {
@@ -83,7 +84,7 @@ public class BoardController {
 		Boolean rValue=false;
 		
 		try {
-			//rValue=service.boardupdate(dto, id);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			rValue=service.boardUpdate(dto, id, number);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -95,12 +96,26 @@ public class BoardController {
 		}
 		else if(serviceNo == 4) {		//delete
 		//1 파라미터 추출
+		Integer number = (Integer) param.get("number");
+		String id = (String) param.get("id");
+		String role = (String) param.get("role");
 		//2 입력값 검증
+		if(number == null || id == null || role == "MEMBER") {
+		System.out.println("[ERROR] Data Validation Check Error!");
+		return null;
+		}
 		//3 서비스 실행
+		
+		Boolean rValue = false;
+		try {
+			rValue = service.boardDelete(id); 
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		//4 view로 전달
 			System.out.println("Board_Delete Block");
 			Map<String,Object> result = new HashMap();
-//			result.put("result", rValue);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			result.put("result", rValue);
 			return result;
 		}
 		return null;

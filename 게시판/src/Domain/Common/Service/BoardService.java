@@ -1,5 +1,6 @@
 package Domain.Common.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ public class BoardService {
 
 	private BoardDao Bdao;
 	private CommentDao Cdao;
-
+	
 	// 싱글톤
 	public static BoardService instance;
 
@@ -60,16 +61,16 @@ public class BoardService {
 	}
 
 	// 글 수정하기
-	public boolean boardupdate(BoardDto dto, String sid) throws Exception {
+	public boolean boardUpdate(BoardDto dto, String sid,int number) throws Exception {
 		System.out.println("BoardService's boardupdate()");
 		
 		// 멤버서비스에서 role(권한-회원인지아닌지) 정보를 가져옴
 		String role = memberService.getRole(sid);
 		Session session = (Session)memberService.sessionMap.get(sid);	
 		
-		//BoardDao 에서 내용꺼내옴
+		Map<String,Object> results = memberService.login("id", "pw"); 
 		
-		if (session.getId().equals(dto.getId())) {
+		if (session.getId().equals(dto.getId()) || role == "MASTER") {
 			int result = Bdao.update(dto);
 			if (result > 0)
 				return true;
@@ -78,37 +79,37 @@ public class BoardService {
 	}
 	
 	//글 삭제하기
-	public boolean boarddelete(Integer boardNo,String sid) throws Exception{
-		System.out.println("BoarsService's boarddelete()");
+							// 이거 선생님말듣고 수정   0704 박영민 13:17
+	public boolean boardDelete(String id) throws Exception{
+		System.out.println("BoardService's boardDelete()");
+		String role = memberService.getRole(id);
+		Session session = (Session)memberService.sessionMap.get(id);
+		Map<String, Object> results = memberService.login("id","pw");
 		
-		Session session = (Session)memberService.sessionMap.get(sid);
-		//sid를 통해서 Role_User/Member/Admin받아오기
-		
-//		if (삭제하려는 게시물의 글쓴이가 맞다면삭제 || 관리자계정이라면 삭제) {
-//			int result = Bdao.delete(dto);
-//			if (result > 0)
-//				return true;
-//		}
+		if (session.getId().equals(id) || role == "MASTER"){
+			int result = Bdao.delete(id); 
+			if (result > 0)
+				return true;
+		}
 		return false;
 	}
 	
 	//글 id로 조회
-	public boolean boardsearch_id(BoardDto dto) throws Exception{
-		System.out.println("BoarsService's boardsearch()");
+	public List<BoardDto> boardsearch_id(String id) throws Exception{
+		System.out.println("BoardService's boardsearch()");
 		
-		return false;
 	}
 	
 	//글 title로 조회
 	public boolean boardsearch_title(BoardDto dto) throws Exception{
-		System.out.println("BoarsService's boardsearch_title()");
+		System.out.println("BoardService's boardsearch_title()");
 		
 		return false;
 	}
 	
 	//내가 쓴 글 조회
 	public boolean boardsearch_mine(BoardDto dto) throws Exception{
-		System.out.println("BoarsService's boardsearch_mine()");
+		System.out.println("BoardService's boardsearch_mine()");
 		
 		return false;
 	}
@@ -117,28 +118,28 @@ public class BoardService {
 	
 	//댓글 조회
 	public List<CommentDto> Commentselect(CommentDto dto) throws Exception{
-		System.out.println("BoarsService's Commentselect()");
+		System.out.println("BoardService's Commentselect()");
 		
 		return Cdao.select();
 	}
 	
 	//댓글 작성
 	public boolean Commentadd(CommentDto dto, String role) throws Exception{
-		System.out.println("BoarsService's Commentadd()");
+		System.out.println("BoardService's Commentadd()");
 		
 		return false;
 	}
 	
 	//댓글 수정
 	public boolean Commentupdate(CommentDto dto, String role) throws Exception{
-		System.out.println("BoarsService's Commentupdate()");
+		System.out.println("BoardService's Commentupdate()");
 		
 		return false;
 	}
 	
 	//댓글 삭제
 	public boolean Commentdelete(String id, String role) throws Exception{
-		System.out.println("BoarsService's Commentdelete()");
+		System.out.println("BoardService's Commentdelete()");
 		
 		return false;
 	}

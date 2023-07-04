@@ -55,7 +55,7 @@ public class BoardDao {
 	public List<BoardDto> select() throws Exception{
 		List<BoardDto> list = new ArrayList();
 		BoardDto dto = null;
-		pstmt = conn.prepareStatement("select * from tbl_board");
+		pstmt = conn.prepareStatement("select * from tbl_contents");
 		rs=pstmt.executeQuery();
 		if(rs!=null) {
 			while(rs.next()) {
@@ -84,7 +84,7 @@ public class BoardDao {
 	public List<BoardDto> search_id(String id) throws Exception{
 		List<BoardDto> list = new ArrayList();
 		BoardDto dto = null;
-		pstmt = conn.prepareStatement("select * from tbl_board where id = ?");
+		pstmt = conn.prepareStatement("select * from tbl_contents where id = ?");
 		pstmt.setString(1, id);
 		rs = pstmt.executeQuery();
 		if(rs!=null) {
@@ -103,7 +103,7 @@ public class BoardDao {
 	public List<BoardDto> search_title(String title) throws Exception{
 		List<BoardDto> list = new ArrayList();
 		BoardDto dto = null;
-		pstmt = conn.prepareStatement("select * from tbl_board where title = ?");
+		pstmt = conn.prepareStatement("select * from tbl_contents where title = ?");
 		pstmt.setString(1, id);
 		rs = pstmt.executeQuery();
 		if(rs!=null) {
@@ -123,7 +123,7 @@ public class BoardDao {
 	public List<BoardDto> select_mine(String id) throws Exception{
 		List<BoardDto> list = new ArrayList();
 		BoardDto dto = null;
-		pstmt = conn.prepareStatement("select * from tbl_board where id = ?");
+		pstmt = conn.prepareStatement("select * from tbl_contents where id = ?");
 		pstmt.setString(1, id);
 		rs = pstmt.executeQuery();
 		if(rs!=null) {
@@ -141,19 +141,20 @@ public class BoardDao {
 	}
 //	내가 쓴 글 수정
 	public int update(BoardDto dto) throws Exception{
-		pstmt = conn.prepareStatement("update tbl_board set title=?,contents=?");
-		pstmt.setString(1, dto.getTitle());
-		pstmt.setString(2, dto.getContents());
+		pstmt = conn.prepareStatement("update tbl_contents set title=?,contents=?");
+		pstmt.setString(3, dto.getTitle());
+		pstmt.setString(4, dto.getContents());
 		
 		return pstmt.executeUpdate();
 	}
 //	내가 쓴 글 삭제
-	public int delete(BoardDto dto) throws Exception{
-		pstmt = conn.prepareStatement("delete from tbl_board where id = ? and number = ?");
-		pstmt.setString(1, dto.getId());
-		pstmt.setInt(2, dto.getNumber());
+	public int delete(String id) throws Exception{  //여기도 이어져요
+		pstmt = conn.prepareStatement("delete from tbl_board where id = ?");
+		pstmt.setString(1, id);
+		int result = pstmt.executeUpdate();
+		pstmt.close();
 		
-		return pstmt.executeUpdate();
+		return result;
 	}
 
 
