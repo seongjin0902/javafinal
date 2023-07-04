@@ -43,7 +43,7 @@ public class MemberService {
 	}
 	
 //	로그아웃
-	public Boolean logout(String id, String role) {
+	public Boolean logout(String id, String pw) {
 		
 	}
 	

@@ -64,7 +64,7 @@ public class BoardDao {
 				dto.setId(rs.getString("id"));
 				dto.setTitle(rs.getString("title"));
 				dto.setContents(rs.getString("contents"));
-				dto.setNowdate(rs.getString("date"));
+				dto.setDate(rs.getString("date"));
 				dto.setHits(rs.getInt("hits"));
 				list.add(dto);
 			}
@@ -93,7 +93,7 @@ public class BoardDao {
 			dto.setNumber(rs.getInt("number"));
 			dto.setId(rs.getString("id"));
 			dto.setTitle(rs.getString("title"));
-			dto.setNowdate(rs.getString("date"));
+			dto.setDate(rs.getString("date"));
 			dto.setHits(rs.getInt("hits"));
 			rs.close();
 		}
@@ -112,7 +112,7 @@ public class BoardDao {
 			dto.setNumber(rs.getInt("number"));
 			dto.setId(rs.getString("id"));
 			dto.setTitle(rs.getString("title"));
-			dto.setNowdate(rs.getString("date"));
+			dto.setDate(rs.getString("date"));
 			dto.setHits(rs.getInt("hits"));
 			rs.close();
 		}
