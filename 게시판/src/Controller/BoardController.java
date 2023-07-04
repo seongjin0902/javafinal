@@ -54,7 +54,7 @@ public class BoardController {
 		
 		Boolean rValue = false;
 		try {
-			rValue = service.InsertBoard(dto,number);
+			rValue = service.boardAdd(dto);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -83,7 +83,7 @@ public class BoardController {
 		Boolean rValue=false;
 		
 		try {
-			rValue=service.UpadteBoard(dto,number);
+			//rValue=service.boardupdate(dto, id);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -100,7 +100,7 @@ public class BoardController {
 		//4 view로 전달
 			System.out.println("Board_Delete Block");
 			Map<String,Object> result = new HashMap();
-			result.put("result", rValue);
+//			result.put("result", rValue);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			return result;
 		}
 		return null;

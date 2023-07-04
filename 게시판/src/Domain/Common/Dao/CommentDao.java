@@ -18,6 +18,14 @@ public class CommentDao {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+	
+	private static CommentDao instance;
+	public static CommentDao getInstance() {
+		if(instance==null)
+			instance = new CommentDao();
+		return instance;
+	}
+	
 	private CommentDao(){
 		id = "root";
 		pw = "1234";

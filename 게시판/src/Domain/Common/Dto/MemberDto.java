@@ -3,6 +3,7 @@ package Domain.Common.Dto;
 public class MemberDto {
 	private String id;
 	private String pw;
+	private String role;
 	
 //	기본 생성자
 	public MemberDto() {}
@@ -11,6 +12,7 @@ public class MemberDto {
 	public MemberDto(String id, String pw) {
 		this.id = id;
 		this.pw = pw;
+		this.role = role;
 	}
 
 //	toString 재정의

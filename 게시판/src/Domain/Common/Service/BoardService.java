@@ -1,11 +1,13 @@
 package Domain.Common.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import Domain.Common.Dao.BoardDao;
 import Domain.Common.Dao.CommentDao;
 import Domain.Common.Dto.BoardDto;
 import Domain.Common.Dto.CommentDto;
+import Domain.Common.Service.Auth.Session;
 
 public class BoardService {
 
@@ -41,11 +43,12 @@ public class BoardService {
 	}
 
 	// 글 등록하기(회원)
-	public boolean boardAdd(BoardDto dto, String role) throws Exception {
+	public boolean boardAdd(BoardDto dto) throws Exception {
 		System.out.println("BoardService's boardAdd()");
 
 		// 멤버서비스에서 role(권한-회원인지아닌지) 정보를 가져옴
-		String role = memberService.getRole(role);
+		Map<String,Object>results =  memberService.login("id","pw");
+		String role = (String)results.get("result");
 
 		if (role.equals("ROLE_MEMBER")) {
 			int result = Bdao.insert(dto, role);
@@ -57,13 +60,16 @@ public class BoardService {
 	}
 
 	// 글 수정하기
-	public boolean boardupdate(BoardDto dto, String role) throws Exception {
+	public boolean boardupdate(BoardDto dto, String sid) throws Exception {
 		System.out.println("BoardService's boardupdate()");
-
+		
 		// 멤버서비스에서 role(권한-회원인지아닌지) 정보를 가져옴
-		String role = memberService.getRole(role);
-
-		if (role.equals("ROLE_MEMBER")) {
+		String role = memberService.getRole(sid);
+		Session session = (Session)memberService.sessionMap.get(sid);	
+		
+		//BoardDao 에서 내용꺼내옴
+		
+		if (session.getId().equals(dto.getId())) {
 			int result = Bdao.update(dto);
 			if (result > 0)
 				return true;
@@ -72,16 +78,17 @@ public class BoardService {
 	}
 	
 	//글 삭제하기
-	public boolean boarddelete(BoardDto dto, String role) throws Exception{
+	public boolean boarddelete(Integer boardNo,String sid) throws Exception{
 		System.out.println("BoarsService's boarddelete()");
 		
-		String role = memberService.getRole(role);
+		Session session = (Session)memberService.sessionMap.get(sid);
+		//sid를 통해서 Role_User/Member/Admin받아오기
 		
-		if (role.equals("ROLE_MEMBER")) {
-			int result = Bdao.delete(dto);
-			if (result > 0)
-				return true;
-		}
+//		if (삭제하려는 게시물의 글쓴이가 맞다면삭제 || 관리자계정이라면 삭제) {
+//			int result = Bdao.delete(dto);
+//			if (result > 0)
+//				return true;
+//		}
 		return false;
 	}
 	

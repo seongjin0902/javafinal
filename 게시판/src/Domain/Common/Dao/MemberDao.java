@@ -18,7 +18,15 @@ public class MemberDao {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
-	private MemberDao(){
+	
+	private static MemberDao instance;
+	public static MemberDao getInstance() {
+		if(instance==null)
+			instance = new MemberDao();
+		return instance;
+	}
+	
+	public MemberDao(){
 		id = "root";
 		pw = "1234";
 		url = "jdbc:mysql://localhost:3306/게시판";
@@ -41,7 +49,7 @@ public class MemberDao {
 	
 //	회원 id/pw 저장
 	public int insert(MemberDto dto) throws Exception{
-		pstmt = conn.prepareStatement("insert into tbl_member values(?,?)");
+		pstmt = conn.prepareStatement("insert into tbl_member values(?,?,'MEMBER')");
 		pstmt.setString(1, dto.getId());
 		pstmt.setString(2, dto.getPw());
 		
