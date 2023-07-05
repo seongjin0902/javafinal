@@ -105,6 +105,7 @@ public class MemberController {
 			// 값 추출
 			String id = (String) param.get("id");
 			String pw = (String) param.get("pw");
+			String role = (String) param.get("role");
 			// 값 검증
 			if (id == null || pw == null) {
 				System.out.println("[ERROR] Data Validation Check Error!");
@@ -113,7 +114,7 @@ public class MemberController {
 			// 서비스 실행
 			Boolean rValue = false;
 			try {
-				rValue = service.logout(id, pw);
+				rValue = service.logout(id, pw, role);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
