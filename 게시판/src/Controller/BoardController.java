@@ -6,6 +6,7 @@ import java.util.Map;
 
 import Domain.Common.Dto.BoardDto;
 import Domain.Common.Service.BoardService;
+import Domain.Common.Service.BoardServiceImpl;
 
 public class BoardController {
 
@@ -13,7 +14,7 @@ public class BoardController {
 	private BoardService service; // 파라미터를 보드서비스로 전달하기 위한 변수 생성
 
 	public BoardController() {
-		service = BoardService.getInstance();
+		service = BoardServiceImpl.getInstance();
 	}
 
 	// 1 Select , 2 Insert , 3 Update , 4 Delete

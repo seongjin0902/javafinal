@@ -73,7 +73,7 @@ public class BoardDao {
 	}
 	
 	//글 하나 조회(number로 조회)
-	public BoardDto select(int number) {
+	public BoardDto select_one(int number) {
 		
 		//여기에 DB연결 코드를 입력해야함
 		//number로 글 하나를 받아오는 것

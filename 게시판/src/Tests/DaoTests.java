@@ -16,7 +16,7 @@ class DaoTests {
 		MemberDao dao = MemberDao.getInstance(); 
 		assertNotNull(dao);
 		
-		dao.insert(new MemberDto("오구","1234"));
+		dao.insert(new MemberDto("오구","1234", null));
 	}
 	@Test
 	void Test1_BoardDaoTest() throws Exception{				// insert
