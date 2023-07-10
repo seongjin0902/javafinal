@@ -8,7 +8,7 @@ import Domain.Common.Dto.MemberDto;
 import Domain.Common.Service.MemberService;
 import Domain.Common.Service.MemberServiceImpl;
 
-public class MemberController {
+public class MemberController implements SubController{
 
 	private MemberService service;
 
@@ -41,7 +41,6 @@ public class MemberController {
 			// 값 추출
 			String id = (String) param.get("id");
 			String pw = (String) param.get("pw");
-		
 
 			// 값 검증
 			if (id == null || pw == null) {
@@ -53,7 +52,7 @@ public class MemberController {
 			System.out.println("Dto : " + dto);
 			Boolean rValue = false;
 			try {
-				rValue = service.Join(new MemberDto("id", "pw","role"));
+				rValue = service.Join(new MemberDto("id", "pw", "role"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -125,8 +124,7 @@ public class MemberController {
 			result.put("result", rValue);
 			return result;
 		}
-		
-		
+
 		return null;
 	}
 }

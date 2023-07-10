@@ -50,7 +50,7 @@ public class Writer_GUI extends JFrame implements ActionListener, KeyListener {
 		txt1.setBounds(40, 70, 700, 40);
 		txt2.setBounds(40, 125, 950, 570);
 
-		btn1.setBounds(770, 10, 90, 30); // 저장
+		btn1.setBounds(770, 70, 110, 40); // 저장
 		btn2.setBounds(870, 700, 90, 30); // 나가기
 
 		scroll1.setBounds(40, 125, 950, 570);

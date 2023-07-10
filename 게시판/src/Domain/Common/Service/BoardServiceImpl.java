@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import Domain.Common.Dao.BoardDao;
+import Domain.Common.Dao.BoardDaoImpl;
 import Domain.Common.Dao.CommentDao;
 import Domain.Common.Dto.BoardDto;
 import Domain.Common.Dto.CommentDto;
@@ -26,7 +27,7 @@ public class BoardServiceImpl implements BoardService{
 	private MemberServiceImpl memberService;
 
 	private BoardServiceImpl() {
-		Bdao = BoardDao.getInstance();
+		Bdao = BoardDaoImpl.getInstance();
 		memberService = MemberServiceImpl.getInstance();
 	}
 

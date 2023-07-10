@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import Domain.Common.Dao.MemberDao;
+import Domain.Common.Dao.MemberDaoImpl;
 import Domain.Common.Dto.MemberDto;
 import Domain.Common.Service.Auth.Session;
 
@@ -24,7 +25,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	private MemberServiceImpl() {
-		dao = MemberDao.getInstance();
+		dao = MemberDaoImpl.getInstance();
 		sessionMap = new HashMap();
 	}
 
